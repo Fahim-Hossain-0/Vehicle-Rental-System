@@ -1,0 +1,1 @@
+  role VARCHAR(10) NOT NULL CHECK (role IN ('admin', 'customer')),
