@@ -27,14 +27,7 @@ app.use('/api/v1',authRouters)
 app.use('/api/v1',userRouters)
 
 
-// app.post('/api/v1/users',(req:Request,res:Response)=>{
 
-// console.log(req.body);
-//   res.status(201).json({
-//     success:true,
-//     message:'api is work'
-//   })
-// })
 
 app.listen(config.port, () => {
   console.log(`Example app listening on port ${port}`)
