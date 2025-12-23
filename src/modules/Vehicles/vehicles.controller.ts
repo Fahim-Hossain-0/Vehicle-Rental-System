@@ -17,6 +17,73 @@ const createVehicles = async(req:Request,res:Response)=>{
     }
 }
 
+const getAllVehicles = async(req:Request,res:Response)=>{
+    try {
+        const result = await vehicleService.getAllVehicles()
+        res.status(200).json({
+            success:true,
+            message: "Vehicles retrieved successfully",
+            data:result
+        })
+    } catch (error:any) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+const getSingleVehicles = async(req:Request,res:Response)=>{
+    try {
+          const { vehicleId } = req.params;
+
+    const result = await vehicleService.getSingleVehicles(vehicleId as string);
+        res.status(200).json({
+            success:true,
+            message: "Vehicles retrieved successfully",
+            data:result
+        })
+    } catch (error:any) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+const updateVehicles = async(req:Request,res:Response)=>{
+    try {
+        const { vehicleId } = req.params;
+        const result = await vehicleService.updateVehicles(req.body,vehicleId as string) 
+        if (result.rows.length === 0) {
+
+            res.status(404).json({
+                success: false,
+                message: 'vehicle not found'
+            });
+
+        }
+        else {
+            res.status(200).json({
+                success: true,
+                msg: "users updated successfully",
+                data: result.rows[0]
+            })
+        }
+
+
+    } catch (error: any) {
+       res.status(500).json({
+            success: false,
+            msg: error.massage,
+            details: error
+        })
+    }
+}
+
+
 export const vehiclesController = {
-    createVehicles
+    createVehicles,
+    getAllVehicles,
+    getSingleVehicles,
+    updateVehicles
 }
