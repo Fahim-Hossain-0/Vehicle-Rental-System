@@ -6,7 +6,7 @@ const createVehicles = async(req:Request,res:Response)=>{
         const result = await vehicleService.createVehicles(req.body)
          res.status(200).json({
             success: true,
-            message: "User registered successfully",
+            message: "vehicle registered successfully",
             data: result
         })
     } catch (error:any) {
@@ -65,7 +65,7 @@ const updateVehicles = async(req:Request,res:Response)=>{
         else {
             res.status(200).json({
                 success: true,
-                msg: "users updated successfully",
+                msg: "vehicle updated successfully",
                 data: result.rows[0]
             })
         }
@@ -80,10 +80,38 @@ const updateVehicles = async(req:Request,res:Response)=>{
     }
 }
 
+const deleteVehicles = async (req: Request, res: Response) => {
+    try {
+        const { vehicleId } = req.params;
+        const result = await vehicleService.deleteVehicles(vehicleId as string)
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'vehicle not found'
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            msg: "vehicle deleted successfully",
+            data: null,
+        })
+
+    } catch (error: any) {
+        return res.status(500).json({
+            success: false,
+            msg: error.message,
+            details: error
+        })
+    }
+}
+
 
 export const vehiclesController = {
     createVehicles,
     getAllVehicles,
     getSingleVehicles,
-    updateVehicles
+    updateVehicles,
+    deleteVehicles
 }
