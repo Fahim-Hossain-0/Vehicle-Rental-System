@@ -16,7 +16,6 @@ const createVehicles = async(req:Request,res:Response)=>{
         })
     }
 }
-
 const getAllVehicles = async(req:Request,res:Response)=>{
     try {
         const result = await vehicleService.getAllVehicles()
@@ -49,7 +48,6 @@ const getSingleVehicles = async(req:Request,res:Response)=>{
         })
     }
 }
-
 const updateVehicles = async(req:Request,res:Response)=>{
     try {
         const { vehicleId } = req.params;
@@ -74,38 +72,39 @@ const updateVehicles = async(req:Request,res:Response)=>{
     } catch (error: any) {
        res.status(500).json({
             success: false,
-            msg: error.massage,
+            msg: error.message,
             details: error
         })
     }
 }
 
 const deleteVehicles = async (req: Request, res: Response) => {
-    try {
-        const { vehicleId } = req.params;
-        const result = await vehicleService.deleteVehicles(vehicleId as string)
-
-        if (result.rowCount === 0) {
-            return res.status(404).json({
-                success: false,
-                message: 'vehicle not found'
-            })
-        }
-
-        return res.status(200).json({
-            success: true,
-            msg: "vehicle deleted successfully",
-            data: null,
-        })
-
-    } catch (error: any) {
-        return res.status(500).json({
-            success: false,
-            msg: error.message,
-            details: error
-        })
+  try {
+    const result = await vehicleService.deleteVehicles(
+      req.params.vehicleId as string
+    );
+    if (result == null) {
+      return res.status(200).json({
+        success: false,
+        message: "vehicle booking status active can not delete",
+      });
     }
-}
+
+    if (result.rowCount === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Vehicle not found" });
+    }
+
+    res
+      .status(200)
+      .json({ success: true, message: "Vehicle deleted successfully" });
+  } catch (error: any) {
+    res
+      .status(500)
+      .json({ success: false, message: error.message, error: error });
+  }
+};
 
 
 export const vehiclesController = {
