@@ -58,7 +58,7 @@ const initDB = async () => {
       )
     `);
 
-    console.log("✅ All tables created successfully");
+    
   } catch (error) {
     console.error("❌ initDB error:", error);
   }

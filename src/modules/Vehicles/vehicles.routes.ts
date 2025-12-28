@@ -11,6 +11,7 @@ router.get('/vehicles', vehiclesController.getAllVehicles)
 router.get("/vehicles/:vehicleId", vehiclesController.getSingleVehicles)
 
 router.put('/vehicles/:vehicleId', auth('admin'), vehiclesController.updateVehicles)
+
 router.delete('/vehicles/:vehicleId', auth('admin'), vehiclesController.deleteVehicles)
 
 
