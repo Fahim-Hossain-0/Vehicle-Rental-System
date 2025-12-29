@@ -1,6 +1,6 @@
 🚗 Vehicle Rental System
 
-Live URL: https://your-project-name.vercel.app
+Live URL: https://vehicle-rental-system-khaki.vercel.app
 
 A backend Vehicle Rental System API built with Express.js and TypeScript, providing secure authentication, role-based access control, and full vehicle and booking management.
 
@@ -40,7 +40,8 @@ Vercel (Deployment)
 
 ⚙️ Setup & Usage Instructions
 1️⃣ Clone the Repository
-git clone https://github.com/your-username/vehicle-rental-system.git
+
+git clone https://github.com/Fahim-Hossain-0/Vehicle-Rental-System.git
 cd vehicle-rental-system
 
 2️⃣ Install Dependencies
